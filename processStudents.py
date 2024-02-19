@@ -33,7 +33,27 @@ import csv
 
 # create a file object to open the file in read mode
 
+infile = open('students.csv', 'r')
+outfile = open('processedStudents.csv', 'a')
+csvfile = csv.reader(infile)
+fields = next(infile)
+#create a new dictionary named 'student_dict'
+student_dict = {}
 
+#use a loop to iterate through each row of the file
+for row in csvfile:
+    stud_id = row[0]
+    firstname = row[2]
+    lastname = row[3]
+    major = row[6]
+    gpa = float(row[8])
+    #check if the GPA is below 3.0. If so, write the record to the outfile
+    if gpa < 3.0:
+        outfile.write(f"{stud_id},{firstname},{lastname},{major}\n")
+
+    # append the record to the dictionary with the student Full name in proper case 
+        student_dict[firstname] = gpa
+        print(student_dict)
 
 # create a csv object from the file object
 
@@ -80,7 +100,7 @@ import csv
 
 
 #display the wordcloud
-from pathlib import Path
+'''from pathlib import Path
 from wordcloud import WordCloud
 import imageio.v2 as imageio
 import matplotlib.pyplot as plt
@@ -93,7 +113,7 @@ wordcloud = wordcloud.generate(text)
 wordcloud = wordcloud.to_file("RomeoAndJulietHeart.png")
 plt.imshow(wordcloud)
 plt.show()
-
+'''
 
 
 
